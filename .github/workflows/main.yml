@@ -30,7 +30,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/telegraff
-            git pull
+            sudo git pull
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +43,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/telegraff
-            docker image build -t telegram .
+            sudo docker image build -t telegram .
             cd ..
             cd yakaboo-mobile-spring
-            docker-compose up -d
+            sudo docker-compose up -d
