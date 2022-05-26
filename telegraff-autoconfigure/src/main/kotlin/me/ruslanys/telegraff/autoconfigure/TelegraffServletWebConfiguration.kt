@@ -1,8 +1,5 @@
 package me.ruslanys.telegraff.autoconfigure
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import me.ruslanys.telegraff.autoconfigure.property.TelegramProperties
 import me.ruslanys.telegraff.core.client.TelegramClient
 import me.ruslanys.telegraff.core.client.TelegramPollingClient
@@ -24,7 +21,6 @@ import org.springframework.context.ApplicationEventPublisher
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.GenericApplicationContext
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 
 /**
  * Configuration for Telegraff when used in a servlet web context.
@@ -107,19 +103,4 @@ class TelegraffServletWebConfiguration(val telegramProperties: TelegramPropertie
     fun callbackQueryFilter(telegramApi: TelegramApi): CallbackQueryAnswerFilter {
         return CallbackQueryAnswerFilter(telegramApi)
     }
-
-    // endregion
-
-    @Bean
-    fun objectMapperBuilder(): Jackson2ObjectMapperBuilder {
-        return Jackson2ObjectMapperBuilder().modulesToInstall(KotlinModule())
-    }
-
-    @Bean
-    fun objectMapper(): ObjectMapper {
-        return ObjectMapper().apply {
-            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        }
-    }
-
 }

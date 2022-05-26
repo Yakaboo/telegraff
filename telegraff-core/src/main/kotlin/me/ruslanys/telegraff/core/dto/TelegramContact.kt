@@ -19,10 +19,17 @@ data class TelegramContact(
     val phoneNumber: String?
 ) {
     constructor() : this(
-        0L,
-        String.EMPTY,
-        null,
-        null
+        userId = 0L,
+        firstName = String.EMPTY,
+        lastName = null,
+        phoneNumber = null
+    )
+
+    constructor(phoneNumber: String) : this(
+        userId = 0L,
+        firstName = String.EMPTY,
+        lastName = null,
+        phoneNumber = phoneNumber
     )
 
     fun getUserFullName(): String = firstName.plus(
